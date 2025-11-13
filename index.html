@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>فرم رزرو بازدید پارادایس</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+      background-image: url('background.jpeg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      direction: rtl;
+    }
+
+    form {
+      background: white;
+      padding: 30px 30px 20px;
+      border-radius: 16px;
+      max-width: 420px;
+      width: 90%;
+      box-shadow: 0 0 16px rgba(0,0,0,0.2);
+      text-align: right;
+    }
+
+    img.logo {
+      width: 120px;
+      display: block;
+      margin: 0 auto 20px auto;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #222;
+      font-size: 20px;
+      text-align: center;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 15px;
+      text-align: right;
+    }
+
+    button {
+      background-color: #007acc;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      margin-top: 16px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    button:hover {
+      background-color: #005f99;
+    }
+
+    .thank-you {
+      display: none;
+      max-width: 600px;
+      padding: 40px;
+      background-color: rgba(255, 255, 255, 0.85);
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    }
+
+    .thank-you img {
+      width: 100px;
+      margin-bottom: 20px;
+    }
+
+    .thank-you h2 {
+      font-size: 22px;
+      color: #222;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    .thank-you p {
+      font-size: 16px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <form id="paradiseForm">
+    <img src="logo_paradise.png" alt="لوگوی پارادایس" class="logo">
+    <h2>فرم رزرو بازدید خصوصی</h2>
+
+  <input type="text" name="نام و نام خانوادگی" placeholder="نام و نام خانوادگی" required>
+  <input type="tel" name="شماره تماس" id="phone" placeholder="شماره تماس" required pattern="09[0-9]{9}" maxlength="11" title="شماره باید با 09 شروع شود و شامل 11 رقم باشد.">
+
+  <select name="هدف بازدید" required>
+    <option value="">هدف از بازدید</option>
+    <option>خرید برای سکونت</option>
+    <option>سرمایه‌گذاری</option>
+  </select>
+
+  <select name="زمان ترجیحی بازدید" required>
+    <option value="">زمان ترجیحی بازدید</option>
+    <option>صبح</option>
+    <option>بعدازظهر</option>
+    <option>شب</option>
+  </select>
+
+  <select name="تعداد خواب مورد علاقه" required>
+    <option value="">تعداد خواب مورد علاقه</option>
+    <option>دو خواب</option>
+    <option>سه خواب</option>
+    <option>چهار خواب</option>
+  </select>
+
+  <select name="متراژ مورد علاقه" required>
+    <option value="">متراژ مورد علاقه</option>
+    <option>حدود 120 – 160 متر</option>
+    <option>حدود 170 – 210 متر</option>
+    <option>بالاتر از 250 متر</option>
+  </select>
+
+  <!-- ⭐⭐⭐ بخش نحوه آشنایی + شرطی ⭐⭐⭐ -->
+  <select name="نحوه آشنایی با پارادایس" id="how" required>
+    <option value="">نحوه آشنایی با پارادایس</option>
+    <option value="اینستاگرام">اینستاگرام</option>
+    <option value="معرفی دوستان">معرفی دوستان</option>
+    <option value="مشاور املاک">مشاور املاک</option>
+    <option value="تبلیغات محیطی">تبلیغات محیطی</option>
+  </select>
+
+  <!-- فیلدهای مخفی مشاور املاک -->
+  <div id="agent-section" style="display:none;">
+    <input type="text" name="نام املاک" placeholder="نام املاک">
+    <input type="text" name="نام و نام خانوادگی مشاور" placeholder="نام و نام خانوادگی مشاور">
+    <input
+      type="tel"
+      name="شماره همراه مشاور"
+      id="agentPhone"
+      placeholder="شماره همراه مشاور"
+      inputmode="numeric"
+      pattern="09[0-9]{9}"
+      maxlength="11"
+      title="شماره همراه مشاور باید فقط عدد و به صورت 11 رقمی (مثلاً 09123456789) باشد."
+    >
+  </div>
+
+  <!-- فیلدهای مخفی معرفی دوستان -->
+  <div id="friend-section" style="display:none;">
+    <input type="text" name="نام و نام خانوادگی دوست" placeholder="نام و نام خانوادگی دوست">
+    <input
+      type="tel"
+      name="شماره همراه دوست"
+      id="friendPhone"
+      placeholder="شماره همراه دوست"
+      inputmode="numeric"
+      pattern="09[0-9]{9}"
+      maxlength="11"
+      title="شماره همراه دوست باید فقط عدد و به صورت 11 رقمی (مثلاً 09123456789) باشد."
+    >
+  </div>
+  <!-- ⭐⭐⭐ پایان فیلدهای شرطی ⭐⭐⭐ -->
+
+    <button type="submit">رزرو بازدید خصوصی</button>
+  </form>
+
+  <div class="thank-you" id="thankYou">
+    <img src="logo_paradise.png" alt="لوگوی پارادایس">
+    <h2>از اعتماد شما به پارادایس سپاسگزاریم</h2>
+    <p>مشاوران پارادایس، به‌زودی جهت هماهنگی بازدید با شما تماس خواهند گرفت.</p>
+  </div>
+
+  <script>
+    const form = document.getElementById('paradiseForm');
+    const thankYou = document.getElementById('thankYou');
+    const phoneInput = document.getElementById('phone');
+
+    /* ⭐⭐⭐ نمایش شرطی برای گزینه "مشاور املاک" و "معرفی دوستان" ⭐⭐⭐ */
+    const howSelect = document.getElementById('how');
+    const agentSection = document.getElementById('agent-section');
+    const friendSection = document.getElementById('friend-section');
+
+    howSelect.addEventListener('change', () => {
+      if (howSelect.value === "مشاور املاک") {
+        agentSection.style.display = "block";
+        friendSection.style.display = "none";
+      } else if (howSelect.value === "معرفی دوستان") {
+        friendSection.style.display = "block";
+        agentSection.style.display = "none";
+      } else {
+        agentSection.style.display = "none";
+        friendSection.style.display = "none";
+      }
+    });
+    /* ⭐⭐⭐ پایان شرط ⭐⭐⭐ */
+
+    form.addEventListener('submit', async function(event) {
+      event.preventDefault();
+
+      // ✅ بررسی شماره تماس اصلی
+      const phone = phoneInput.value.trim();
+      const phoneRegex = /^09\d{9}$/;
+      if (!phoneRegex.test(phone)) {
+        alert("شماره تماس معتبر نیست. لطفاً شماره را به‌صورت کامل (مثلاً 09123456789) وارد کنید.");
+        phoneInput.focus();
+        return;
+      }
+
+      // ✅ بررسی شماره همراه مشاور (در صورت وارد شدن)
+      const agentPhoneInput = document.getElementById('agentPhone');
+      if (agentSection.style.display === "block") {
+        const ap = agentPhoneInput.value.trim();
+        if (ap && !phoneRegex.test(ap)) {
+          alert("شماره همراه مشاور باید فقط عدد و 11 رقمی باشد (مثلاً 09123456789).");
+          agentPhoneInput.focus();
+          return;
+        }
+      }
+
+      // ✅ بررسی شماره همراه دوست (در صورت وارد شدن)
+      const friendPhoneInput = document.getElementById('friendPhone');
+      if (friendSection.style.display === "block") {
+        const fp = friendPhoneInput.value.trim();
+        if (fp && !phoneRegex.test(fp)) {
+          alert("شماره همراه دوست باید فقط عدد و 11 رقمی باشد (مثلاً 09123456789).");
+          friendPhoneInput.focus();
+          return;
+        }
+      }
+
+      const formData = new FormData(form);
+      const data = {};
+      formData.forEach((value, key) => {
+        data[key] = value;
+      });
+
+      try {
+        const response = await fetch("https://meymand72.app.n8n.cloud/webhook/paradise-form", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(data)
+        });
+
+        if (!response.ok) throw new Error("Request failed");
+
+        form.style.display = "none";
+        thankYou.style.display = "block";
+      } catch (error) {
+        alert("خطا در ارسال فرم. لطفاً دوباره تلاش کنید.");
+      }
+    });
+  </script>
+</body>
+</html>
